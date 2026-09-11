@@ -59,12 +59,25 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   scrollcontainer: {
-    
+    marginTop: 10,
   },
   itemcontainer: {
     paddingVertical: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#EFE5D8',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  removebutton: {
+    backgroundColor: '#550000',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: Dimensions.get('screen').width * 0.2,
+    height: 30,
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: '#FFF',
   }
 });
 
@@ -100,6 +113,11 @@ export default function App() {
           <Text style={item.done ? styles.donetext : styles.whitetext}>{item.title}</Text>
           <Text style={item.done ? styles.donetext : styles.whitetext}>Due date: {item.date.toLocaleDateString()}</Text>
         </TouchableOpacity>
+        {item.done && (
+          <TouchableOpacity style={styles.removebutton}>
+          <Text style={styles.whitetext}>Delete</Text>
+          </TouchableOpacity> )
+        }
       </View>
     );
   }
