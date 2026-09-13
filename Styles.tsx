@@ -15,9 +15,17 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#403728',
     },
+    subtitle: {
+      fontSize: 14,
+      color: '#403728',
+    },
     text: {
       fontSize: 16,
       color: '#403728',
+    },
+    datetext: {
+      fontSize: 14,
+      color: '#756A59',
     },
     whitetext: {
       fontSize: 16,
@@ -29,11 +37,12 @@ const styles = StyleSheet.create({
       textDecorationLine: 'line-through',
     },
     textinput: {
-      borderColor: '#6f6f6f',
+      borderColor: '#403728',
       borderWidth: 1,
-      backgroundColor: '#EFE5D8',
+      /*backgroundColor: '#EFE5D8',*/
+      backgroundColor: '#F4EEE1',
       width: Dimensions.get('screen').width * 0.65,
-      height: 30,
+      height: 40,
       borderRadius: 4,
       paddingLeft: 10,
     },
@@ -43,11 +52,14 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between'
     },
     addbutton: {
-      backgroundColor: '#D3B792',
+      /*backgroundColor: '#D3B792',*/
+      borderColor: '#403728',
+      borderWidth: 1,
+      backgroundColor: '#F4EEE1',
       justifyContent: 'center',
       alignItems: 'center',
       width: Dimensions.get('screen').width * 0.2,
-      height: 30,
+      height: 40,
       borderRadius: 3,
     },
     scrollcontainer: {

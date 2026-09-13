@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Styles';
-import {RenderItem} from './RenderItem'
+import RenderItem from './RenderItem';
+
 import {
   View,
   Text,
@@ -9,24 +10,6 @@ import {
   FlatList
 } from 'react-native';
 
-const tasks = [
-  {
-    title: 'Feed the dog',
-    done: false,
-    date: new Date(),
-  },
-  {
-    title: 'Do the laundry',
-    done: false,
-    date: new Date(),
-  },
-  {
-    title: 'New task',
-    done: true,
-    date: new Date(),
-  }
-];
-
 export interface Task {
   title: string;
   done: boolean;
@@ -34,17 +17,58 @@ export interface Task {
 }
 
 export default function App() {
+  const [text, setText] = useState('');
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  const addTask = () => {
+    const temp = [...tasks];
+
+    const newTask = {
+      title: text,
+      done: false,
+      date: new Date(),
+    };
+
+    temp.push(newTask);
+
+    setTasks(temp);
+
+    setText('');
+  };
+  const markDone = () => {
+    console.log('markDone');
+  };
+
+  const deleteFunction = () => {
+    console.log('delete');
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My Tasks</Text>
+      <Text style={styles.subtitle}>by Ona Bonnin</Text>
       <View style={styles.inputcontainer}>
-        <TextInput placeholder='Create a new task' style={styles.textinput}/>
-        <TouchableOpacity style={styles.addbutton}>
-          <Text style={styles.whitetext}>Add</Text>
+        <TextInput
+          placeholder='Create a new task'
+          onChangeText={(t: string)=>setText(t)}
+          value={text}
+          style={styles.textinput}
+        />
+        <TouchableOpacity onPress={addTask} style={styles.addbutton} >
+          <Text style={styles.text}>Add</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.scrollcontainer}>
-        <FlatList renderItem={RenderItem} data={tasks}/>
+        <FlatList 
+          renderItem={({item}) => (
+            <RenderItem
+              item={item}
+              deleteFunction={deleteFunction}
+              markDone={markDone}
+            />
+          )}
+          data={tasks}
+        />
       </View>
     </View>
     
