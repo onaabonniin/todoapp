@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
       color: '#403728',
       textDecorationLine: 'line-through',
     },
+    donedatetext: {
+      fontSize: 14,
+      color: '#756A59',
+      textDecorationLine: 'line-through',
+    },
     textinput: {
       borderColor: '#403728',
       borderWidth: 1,

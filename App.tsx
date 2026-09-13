@@ -35,8 +35,16 @@ export default function App() {
 
     setText('');
   };
-  const markDone = () => {
-    console.log('markDone');
+  const markDone = (task: Task) => {
+    const temp = [...tasks];
+
+    const index = temp.findIndex(elem => elem.title === task.title);
+
+    const todo = tasks[index];
+
+    todo.done = !todo.done;
+
+    setTasks(temp);
   };
 
   const deleteFunction = () => {
