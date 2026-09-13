@@ -47,8 +47,14 @@ export default function App() {
     setTasks(temp);
   };
 
-  const deleteFunction = () => {
-    console.log('delete');
+  const deleteFunction = (task: Task) => {
+    const temp = [...tasks];
+
+    const index = temp.findIndex(elem => elem.title === task.title);
+    
+    temp.splice(index, 1);
+
+    setTasks(temp);
   };
 
   return (

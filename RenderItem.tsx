@@ -11,7 +11,7 @@ import {
 interface itemProp {
     item: Task;
     markDone: (task: Task) => void;
-    deleteFunction: () => void;
+    deleteFunction: (task: Task) => void;
 };
   
 export default function RenderItem({item, markDone, deleteFunction}: itemProp) {
@@ -22,7 +22,7 @@ export default function RenderItem({item, markDone, deleteFunction}: itemProp) {
             <Text style={item.done ? styles.donedatetext : styles.datetext}>Due date: {item.date.toLocaleDateString()}</Text>
           </TouchableOpacity>
           {item.done && (
-            <TouchableOpacity style={styles.removebutton} onPress={deleteFunction}>
+            <TouchableOpacity style={styles.removebutton} onPress={()=>deleteFunction(item)}>
             <Text style={styles.whitetext}>Delete</Text>
             </TouchableOpacity> )
           }
