@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './Styles';
 import RenderItem from './RenderItem';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
   View,
@@ -20,6 +21,36 @@ export default function App() {
   const [text, setText] = useState('');
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  const storeData = async (value: Task[]) => {
+    try {
+      await AsyncStorage.setItem('mytodotasks', JSON.stringify(value));
+      console.log('Tareas guardadas:', value);
+    } catch (e) {
+      console.log('Error guardando:', e);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('mytodotasks');
+  
+      console.log('Datos recuperados:', value);
+  
+      if (value !== null) {
+        const tasksLocal = JSON.parse(value);
+        setTasks(tasksLocal);
+      }
+    } catch (e) {
+      console.log('Error leyendo:', e);
+    }
+  };
+
+  useEffect(()=> {
+    getData();
+
+
+  }, []);
+
   const addTask = () => {
     const temp = [...tasks];
 
@@ -32,7 +63,7 @@ export default function App() {
     temp.push(newTask);
 
     setTasks(temp);
-
+    storeData(temp);
     setText('');
   };
   const markDone = (task: Task) => {
@@ -40,11 +71,12 @@ export default function App() {
 
     const index = temp.findIndex(elem => elem.title === task.title);
 
-    const todo = tasks[index];
+    const todo = temp[index];
 
     todo.done = !todo.done;
 
     setTasks(temp);
+    storeData(temp);
   };
 
   const deleteFunction = (task: Task) => {
@@ -55,6 +87,7 @@ export default function App() {
     temp.splice(index, 1);
 
     setTasks(temp);
+    storeData(temp);
   };
 
   return (

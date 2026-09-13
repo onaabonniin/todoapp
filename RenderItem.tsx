@@ -19,7 +19,7 @@ export default function RenderItem({item, markDone, deleteFunction}: itemProp) {
         <View style={styles.itemcontainer}>
           <TouchableOpacity onPress={()=>markDone(item)}>
             <Text style={item.done ? styles.donetext : styles.text}>{item.title}</Text>
-            <Text style={item.done ? styles.donedatetext : styles.datetext}>Due date: {item.date.toLocaleDateString()}</Text>
+            <Text style={item.done ? styles.donedatetext : styles.datetext}>Due date: {new Date(item.date).toLocaleDateString()}</Text>
           </TouchableOpacity>
           {item.done && (
             <TouchableOpacity style={styles.removebutton} onPress={()=>deleteFunction(item)}>
